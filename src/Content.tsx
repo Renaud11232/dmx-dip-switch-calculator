@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react"
 import { DipSwitch } from "./components";
-import { ActionIcon, Box, Grid, NumberInput, SegmentedControl, Text, Title, Tooltip, useMantineColorScheme } from "@mantine/core";
+import { ActionIcon, Affix, Box, Grid, NumberInput, SegmentedControl, Text, Title, Tooltip, useMantineColorScheme } from "@mantine/core";
 import { IconInfoCircle, IconMoonStars, IconSun } from "@tabler/icons-react";
 import { useLocalStorage } from "@mantine/hooks";
 
@@ -99,16 +99,15 @@ export default function Content() {
                 <Grid.Col span={8}>
                 </Grid.Col>
             </Grid>
-            <ActionIcon onClick={toggleColorScheme}
-                        bottom="1rem"
-                        right="1rem"
-                        pos="absolute"
-                        variant="light"
-                        radius="xl"
-                        color="gray"
-                        size="xl">
-                {colorScheme === "dark" ? <IconSun/> : <IconMoonStars/>}
-            </ActionIcon>
+            <Affix position={{bottom: "1rem", right: "1rem"}}>
+                <ActionIcon onClick={toggleColorScheme}
+                            variant="light"
+                            radius="xl"
+                            color="gray"
+                            size="xl">
+                    {colorScheme === "dark" ? <IconSun/> : <IconMoonStars/>}
+                </ActionIcon>
+            </Affix>
         </>
     )
 }
