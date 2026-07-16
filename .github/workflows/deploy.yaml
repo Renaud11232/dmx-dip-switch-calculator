@@ -1,0 +1,33 @@
+name: Deploy to GitHub Pages
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    name: Build website
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+      - run: npm install
+      - run: npm run lint
+      - run: npm run build
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: dist/
+  deploy:
+    name: Deploy website
+    runs-on: ubuntu-latest
+    needs:
+      - build
+    permissions:
+      pages: write
+      id-token: write
+    steps:
+      - uses: actions/deploy-pages@v5
